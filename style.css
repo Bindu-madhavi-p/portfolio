@@ -1,0 +1,516 @@
+/* =======================
+   GLOBAL (LIGHT MODE)
+======================= */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  padding-top: 70px;
+  scroll-behavior: smooth;
+  background: #f8f9fa;
+  color: #1a1a1a;
+}
+
+/* =======================
+   NAVBAR
+======================= */
+.navbar {
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(10px);
+}
+
+/* =======================
+   HERO SECTION
+======================= */
+.hero {
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+
+  padding-top: 0;
+  margin-top: 0;
+
+  background: linear-gradient(135deg, #4b6cb7, #182848);
+  color: white;
+
+  transform: translateZ(0);       /* FIX: GPU layer isolation */
+  isolation: isolate;             /* FIX: prevents particle layer bleed */
+}
+
+/* =======================
+   PROFILE IMAGE (NO FLOAT)
+======================= */
+.profile-img {
+  width: 280px;
+  height: 340px;
+
+  object-fit: cover;
+
+  border-radius: 50% / 60%;
+  border: 5px solid white;
+
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+
+  transition: all 0.4s ease;
+
+  will-change: transform;         /* FIX: pre-optimize for GPU */
+  backface-visibility: hidden;    /* FIX: stops sub-pixel trembling */
+  transform: translateZ(0);       /* FIX: force GPU compositing */
+}
+
+.profile-img:hover {
+  transform: scale(1.05) translateZ(0);   /* FIX: keep translateZ on hover too */
+  box-shadow: 0 20px 45px rgba(0,0,0,0.35);
+}
+
+/* =======================
+   HERO TEXT (FOR TYPING)
+======================= */
+#typing-text {
+  border-right: 2px solid #ffcc00;
+  padding-right: 5px;
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+/* =======================
+   BUTTON (HIRE ME FX)
+======================= */
+.btn-primary-custom {
+  background: #ffb400;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 22px;
+  font-weight: 600;
+  color: black;
+  transition: all 0.3s ease;
+}
+
+.btn-primary-custom:hover {
+  background: #e6a200;
+  transform: scale(1.05) translateZ(0);   /* FIX */
+}
+
+/* Hire button pulse */
+.hire-btn {
+  animation: pulse 2s infinite;
+  will-change: transform;         /* FIX */
+  backface-visibility: hidden;    /* FIX */
+}
+
+@keyframes pulse {
+  0%   { transform: scale(1) translateZ(0); }       /* FIX */
+  50%  { transform: scale(1.08) translateZ(0); }    /* FIX */
+  100% { transform: scale(1) translateZ(0); }       /* FIX */
+}
+
+.hire-btn:hover {
+  transform: scale(1.12) translateZ(0);             /* FIX */
+  box-shadow: 0 10px 25px rgba(255,180,0,0.4);
+}
+
+/* =======================
+   PROJECT GLOW BACKGROUND
+======================= */
+.project-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+
+  width: 200%;
+  height: 200%;
+
+  background: radial-gradient(
+    circle,
+    rgba(75,108,183,0.15) 0%,
+    rgba(75,108,183,0.06) 40%,
+    transparent 70%
+  );
+
+  transform: rotate(0deg);
+  z-index: 0;
+}
+
+/* keep content above glow */
+.project-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes projectGlowMove {
+  0% {
+    transform: translate(0px, 0px) rotate(0deg) translateZ(0);     /* FIX */
+  }
+  50% {
+    transform: translate(30px, -20px) rotate(180deg) translateZ(0); /* FIX */
+  }
+  100% {
+    transform: translate(0px, 0px) rotate(360deg) translateZ(0);   /* FIX */
+  }
+}
+
+/* =======================
+   ACTIVE PROJECT HIGHLIGHT (ON SKILL CLICK)
+======================= */
+.highlight-project {
+  box-shadow:
+    0 0 25px rgba(75,108,183,0.4),
+    0 10px 35px rgba(0,0,0,0.15);
+
+  transform: scale(1.02) translateZ(0);   /* FIX */
+
+  border: 1px solid rgba(75,108,183,0.3);
+}
+
+/* =======================
+   SKILL TAGS (PREMIUM UI)
+======================= */
+.project-skills {
+  margin: 10px 0 15px 0;
+}
+
+.skill-tag {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 7px 13px;
+  margin: 4px;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  border-radius: 20px;
+
+  background: linear-gradient(135deg, #e3f2fd, #f1f5ff);
+  color: #182848;
+
+  border: 1px solid rgba(75,108,183,0.15);
+
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+
+  position: relative;
+  z-index: 2;
+
+  will-change: transform;         /* FIX */
+  backface-visibility: hidden;    /* FIX */
+}
+
+/* hover effect */
+.skill-tag:hover {
+  background: linear-gradient(135deg, #4b6cb7, #182848);
+  color: white;
+
+  transform: translateY(-5px) scale(1.07) translateZ(0);   /* FIX */
+
+  box-shadow: 0 10px 25px rgba(75,108,183,0.35);
+}
+
+/* click feedback animation */
+.skill-tag:active {
+  transform: scale(0.95) translateZ(0);   /* FIX */
+}
+
+/* small glow pulse on hover */
+.skill-tag:hover::after {
+  content: "";
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  border-radius: 20px;
+
+  background: rgba(75,108,183,0.15);
+
+  animation: pulseGlow 1.2s infinite;
+}
+
+@keyframes pulseGlow {
+  0%   { opacity: 0.3; }
+  50%  { opacity: 0.7; }
+  100% { opacity: 0.3; }
+}
+
+/* ================================
+   SKILLS (GRADIENT PREMIUM)
+======================= */
+.skill-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.skill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 10px 16px;
+  border-radius: 30px;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  cursor: pointer;
+  transition: all 0.35s ease;
+
+  background: linear-gradient(135deg, #e3f2fd, #f1f5ff);
+  color: #182848;
+
+  border: 1px solid rgba(75,108,183,0.15);
+
+  will-change: transform;         /* FIX */
+  backface-visibility: hidden;    /* FIX */
+}
+
+.skill-badge:hover {
+  background: linear-gradient(135deg, #4b6cb7, #182848);
+  color: white;
+
+  transform: translateY(-6px) scale(1.1) translateZ(0);   /* FIX */
+
+  box-shadow: 0 12px 30px rgba(75,108,183,0.35);
+}
+
+.skill-badge:hover i {
+  color: #ffcc00;
+  transform: scale(1.2) translateZ(0);   /* FIX */
+}
+
+/* =======================
+   SOCIAL ICONS (BIGGER + ANIMATED) — TREMBLING FIX
+======================= */
+.social-icons a {
+  color: white;
+  font-size: 34px;
+
+  margin-right: 18px;
+
+  display: inline-block;
+
+  transition: color 0.3s ease, box-shadow 0.3s ease;   /* FIX: separate transform from transition */
+
+  animation: floatIcon 4s ease-in-out infinite;
+
+  will-change: transform;         /* FIX */
+  backface-visibility: hidden;    /* FIX */
+  -webkit-font-smoothing: antialiased;  /* FIX */
+}
+
+.social-icons a:hover {
+  color: #ffcc00;
+  transform: translateY(-8px) scale(1.25) translateZ(0);  /* FIX */
+  text-shadow: 0 0 12px rgba(255,204,0,0.4);
+  animation-play-state: paused;   /* FIX: stop float animation on hover to avoid conflict */
+}
+
+@keyframes floatIcon {
+  0%   { transform: translateY(0px) translateZ(0); }    /* FIX */
+  50%  { transform: translateY(-4px) translateZ(0); }  /* FIX */
+  100% { transform: translateY(0px) translateZ(0); }   /* FIX */
+}
+
+/* =======================
+   TABLE (if used)
+======================= */
+.table {
+  background: white;
+}
+
+.table td, .table th {
+  border-color: rgba(0,0,0,0.1);
+}
+
+/* =======================
+   GITHUB SECTION SUPPORT
+======================= */
+#github-stats img {
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  border-radius: 12px;
+  transition: 0.3s ease;
+  will-change: transform;         /* FIX */
+  backface-visibility: hidden;    /* FIX */
+}
+
+#github-stats img:hover {
+  transform: scale(1.02) translateZ(0);   /* FIX */
+}
+
+/* =======================
+   SMOOTH SCROLL
+======================= */
+html {
+  scroll-behavior: smooth;
+}
+
+/* =======================
+   TSPARTICLES — TREMBLING FIX
+======================= */
+#tsparticles {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: -1;
+
+  will-change: transform;         /* FIX */
+  transform: translateZ(0);       /* FIX: own GPU layer, stops affecting other elements */
+  contain: strict;                /* FIX: isolate repaints inside this element only */
+}
+
+/* =======================
+   EDUCATION + CERTIFICATIONS CARDS
+======================= */
+#education .project-card,
+#certifications .project-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+
+  transition: 0.3s ease;
+
+  will-change: transform;         /* FIX */
+  backface-visibility: hidden;    /* FIX */
+}
+
+#education .project-card:hover,
+#certifications .project-card:hover {
+  transform: translateY(-6px) translateZ(0);   /* FIX */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+/* certification links */
+#certifications a {
+  text-decoration: none;
+  color: #182848;
+  font-weight: 500;
+}
+
+#certifications a:hover {
+  color: #4b6cb7;
+  text-decoration: underline;
+}
+
+.edu-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+
+  transition: 0.3s ease;
+
+  will-change: transform;         /* FIX */
+  backface-visibility: hidden;    /* FIX */
+}
+
+.edu-card:hover {
+  transform: translateY(-6px) translateZ(0);   /* FIX */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+/* =======================
+   PROJECTS + EXPERIENCE CARDS
+======================= */
+#projects .project-card,
+#experience .project-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+
+  transition: 0.3s ease;
+
+  position: relative;
+  overflow: hidden;
+
+  will-change: transform;         /* FIX */
+  backface-visibility: hidden;    /* FIX */
+}
+
+/* hover effect */
+#projects .project-card:hover,
+#experience .project-card:hover {
+  transform: translateY(-6px) translateZ(0);   /* FIX */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+/* subtle modern glow accent */
+#projects .project-card::before,
+#experience .project-card::before {
+  content: "";
+  position: absolute;
+
+  top: -50%;
+  left: -50%;
+
+  width: 200%;
+  height: 200%;
+
+  background: radial-gradient(
+    circle,
+    rgba(75,108,183,0.12) 0%,
+    rgba(75,108,183,0.05) 40%,
+    transparent 70%
+  );
+
+  transform: rotate(0deg) translateZ(0);   /* FIX */
+
+  z-index: 0;
+}
+
+/* keep content above glow */
+#projects .project-card > *,
+#experience .project-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* GPA badge highlight */
+.gpa-badge {
+  display: inline-block;
+  margin-top: 10px;
+
+  padding: 6px 14px;
+  border-radius: 20px;
+
+  background: linear-gradient(135deg, #4b6cb7, #182848);
+  color: white;
+
+  font-weight: 600;
+  font-size: 14px;
+
+  box-shadow: 0 5px 15px rgba(75,108,183,0.25);
+}
+
+/* icons */
+.edu-card i {
+  color: #4b6cb7;
+  margin-right: 5px;
+}
+.email-link {
+  color: #4b6cb7;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.email-link:hover {
+  color: #182848;
+  text-decoration: underline;
+}
